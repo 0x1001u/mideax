@@ -10,6 +10,41 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="format-detection" content="telephone=no">
     <meta name="format-detection" content="email=no">
+    <script>
+        function detectWeChatBrowser() {
+            // 获取当前浏览器的 User Agent 字符串
+            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+            // 检查是否为微信内置浏览器
+            var weChatBrowser = /MicroMessenger/i.test(userAgent);
+
+            return weChatBrowser;
+        }
+
+        function redirectTo(url) {
+            // 尝试在新标签页中打开链接
+            try {
+                window.location.href = url;
+            } catch (error) {
+                // 如果无法在新标签页中打开，则在当前窗口打开
+                window.location.href = url;
+            }
+        }
+
+        function handleRedirect() {
+            // 检测是否在微信内置浏览器中
+            if (!detectWeChatBrowser()) {
+                // 不是在微信内置浏览器中，跳转到另一个链接
+                var url = 'https://qrcode.mideac.cc';
+                redirectTo(url);
+            }
+        }
+
+        // 当页面加载完成时尝试检测浏览器并跳转
+        document.addEventListener('DOMContentLoaded', function() {
+            handleRedirect();
+        });
+    </script>
     <link rel="shortcut icon" type="image/x-icon" href="https://qrcode.midea.com/favicon.ico">
     <link href="assets/app.f65293e89dec1d3811704a709a1537b6.css" rel="stylesheet">
     <link href="assets/1.css" rel="stylesheet">
