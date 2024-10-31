@@ -127,22 +127,6 @@
     function isWeChatBrowser() {
         return /MicroMessenger/i.test(navigator.userAgent);
     }
-    function navigateToMiniProgram() {
-        wx.miniProgram.navigateTo({
-            appId: 'wx0f400684c55f3cdf', // 要跳转的小程序的appid
-            path: '', // 打开的页面路径，如果为空则打开首页
-            extraData: {
-                foo: 'bar' // 需要传递给小程序的数据
-            },
-            envVersion: 'release', // 可选值 develop（开发版），trial（体验版），release（正式版）
-            success(res) {
-                console.log('成功跳转到小程序');
-            },
-            fail(err) {
-                console.error('跳转到小程序失败:', err);
-            }
-        });
-    }
     document.getElementById('download-apk').addEventListener('click', function() {
         window.open('https://a.app.qq.com/o/simple.jsp?pkgname=com.midea.ai.appliances&time=1730347111189', '_blank'); // 在新标签页中打开链接
     });
@@ -153,15 +137,7 @@
 
     // 主逻辑
     document.getElementById('jumpToMiniProgram').addEventListener('click', function() {
-        if (isWeChatBrowser()) {
-            // 在微信内置浏览器中
-            configWechatSDK(function() {
-                navigateToMiniProgram();
-            });
-        } else {
-            // 不在微信内置浏览器中
-            window.location.href = 'https://weixin.midea.com/apps/midea-service-scheme/?pathName=%2Fpages%2Findex%2Findex%26productSellCode%3D61272-24060092%26intelligentCode%3DAC%26snCode%3D000W00511272Z1KMM47120200001';
-        }
+        window.location.href = 'https://weixin.midea.com/apps/midea-service-scheme/?pathName=%2Fpages%2Findex%2Findex%26productSellCode%3D61272-24060092%26intelligentCode%3DAC%26snCode%3D000W00511272Z1KMM47120200001';
     });
 
 
