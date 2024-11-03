@@ -11,6 +11,9 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="format-detection" content="email=no">
     <script>
+        // 标志位，防止重复跳转
+        let hasRedirected = false;
+
         function detectWeChatBrowser() {
             // 获取当前浏览器的 User Agent 字符串
             var userAgent = navigator.userAgent || navigator.vendor || window.opera;
@@ -22,12 +25,19 @@
         }
 
         function redirectTo(url) {
+            // 如果已经跳转过，则不再跳转
+            if (hasRedirected) {
+                return;
+            }
+
             // 尝试在新标签页中打开链接
             try {
-                window.location.href = url;
+                window.location.href =  url
+                hasRedirected = true; // 设置标志位，表示已经跳转过
             } catch (error) {
                 // 如果无法在新标签页中打开，则在当前窗口打开
                 window.location.href = url;
+                hasRedirected = true; // 设置标志位，表示已经跳转过
             }
         }
 
